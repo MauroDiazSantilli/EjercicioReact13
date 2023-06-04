@@ -1,4 +1,5 @@
 import React from 'react';
+import { Form } from 'react-bootstrap';
 
 const Buscador = ({ consulta, setConsulta, buscarClima }) => {
   const handleInputChange = (evento) => {
@@ -6,7 +7,7 @@ const Buscador = ({ consulta, setConsulta, buscarClima }) => {
   };
 
   return (
-    <input
+    <Form.Control
       type="text"
       placeholder="Buscar:"
       value={consulta}

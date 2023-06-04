@@ -1,20 +1,17 @@
 import React from 'react';
+import { Card } from 'react-bootstrap';
 
 const ClimaCard = ({ clima, obtenerFecha }) => {
   return (
-    <div>
-      <div>
-        <div>{clima.name}, {clima.sys.country}</div>
-        <div>{obtenerFecha(new Date())}</div>
-      </div>
-      <div>
-        <div>
-          {Math.round(clima.main.temp)}°C
-        </div>
-        <div>{clima.weather[0].main}</div>
-      </div>
-    </div>
+    <Card>
+      <Card.Body>
+        <Card.Title>{clima.name}, {clima.sys.country}</Card.Title>
+        <Card.Text>{obtenerFecha(new Date())}</Card.Text>
+        <Card.Text>{Math.round(clima.main.temp)}°C</Card.Text>
+        <Card.Text>{clima.weather[0].main}</Card.Text>
+      </Card.Body>
+    </Card>
   );
 };
 
-export default ClimaCard
+export default ClimaCard;
