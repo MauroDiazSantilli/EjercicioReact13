@@ -1,16 +1,14 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { Container } from 'react-bootstrap';
+import './App.css';
+import Clima from './components/Clima';
 
 function App() {
-  
-
   return (
-    <>
-      
-    </>
-  )
+    <Container>
+      <Clima />
+    </Container>
+  );
 }
 
-export default App
+export default App;
