@@ -12,9 +12,9 @@ function Clima() {
   const [consulta, setConsulta] = useState('');
   const [clima, setClima] = useState({});
 
-  const buscarClima = (evento) => {
+  const pedirClima = (evento) => {
     if (evento.key === "Enter") {
-      fetch(`${api.fuente}weather?q=${consulta}&appid=${api.clave}&units=metric`)
+      fetch(`${api.fuente}weather?q=${consulta}&appid=${api.clave}&units=metric&lang=es`)
         .then(res => res.json())
         .then(resultado => {
           setClima(resultado);
@@ -24,33 +24,28 @@ function Clima() {
     }
   };
 
-  const obtenerFecha = (fecha) => {
-    let meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
-    let dias = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+  const resultadoFecha = (fecha) => {
+    let opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
+    let fechaFormateada = fecha.toLocaleDateString('es-ES', opcionesFecha);
 
-    let dia = dias[fecha.getDay()];
-    let numeroDia = fecha.getDate();
-    let mes = meses[fecha.getMonth()];
-    let año = fecha.getFullYear();
-
-    return `${dia} ${numeroDia} ${mes} ${año}`;
+    return fechaFormateada;
   };
 
   return (
     <Container>
-        <div>
-          <Buscador
-            consulta={consulta}
-            setConsulta={setConsulta}
-            buscarClima={buscarClima}
-          />
-        </div>
-        {(typeof clima.main !== "undefined") ? (
-          <ClimaCard
-            clima={clima}
-            obtenerFecha={obtenerFecha}
-          />
-        ) : ('')} 
+      <div>
+        <Buscador
+          consulta={consulta}
+          setConsulta={setConsulta}
+          pedirClima={pedirClima}
+        />
+      </div>
+      {(typeof clima.main !== "undefined") ? (
+        <ClimaCard
+          clima={clima}
+          resultadoFecha={resultadoFecha}
+        />
+      ) : ('')}
     </Container>
   );
 }

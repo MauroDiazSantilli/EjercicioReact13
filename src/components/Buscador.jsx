@@ -1,7 +1,7 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
 
-const Buscador = ({ consulta, setConsulta, buscarClima }) => {
+const Buscador = ({ consulta, setConsulta, pedirClima }) => {
   const handleInputChange = (evento) => {
     setConsulta(evento.target.value);
   };
@@ -12,7 +12,7 @@ const Buscador = ({ consulta, setConsulta, buscarClima }) => {
       placeholder="Buscar:"
       value={consulta}
       onChange={handleInputChange}
-      onKeyPress={buscarClima}
+      onKeyPress={pedirClima}
     />
   );
 };
