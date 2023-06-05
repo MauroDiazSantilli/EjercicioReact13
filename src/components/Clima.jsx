@@ -19,7 +19,7 @@ function Clima() {
         .then(res => res.json())
         .then(resultado => {
           if (resultado.cod === '404') {
-            setError('No se encontraron datos para la ciudad ingresada.');
+            setError('No se encontraron datos para la ciudad ingresada');
             setClima({});
           } else {
             setClima(resultado);
@@ -28,7 +28,7 @@ function Clima() {
           setConsulta('');
         })
         .catch(error => {
-          setError('Ocurrió un error al obtener los datos. Por favor, intente nuevamente.');
+          setError('Ocurrió un error al obtener los datos. Por favor, intente nuevamente');
           setClima({});
           setConsulta('');
         });
