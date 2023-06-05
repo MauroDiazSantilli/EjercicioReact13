@@ -28,7 +28,7 @@ function Clima() {
           setConsulta('');
         })
         .catch(error => {
-          setError('Ocurrió un error al obtener los datos. Por favor, intenta nuevamente.');
+          setError('Ocurrió un error al obtener los datos. Por favor, intente nuevamente.');
           setClima({});
           setConsulta('');
         });
