@@ -12,8 +12,8 @@ function Clima() {
   const [consulta, setConsulta] = useState('');
   const [clima, setClima] = useState({});
 
-  const pedirClima = (evento) => {
-    if (evento.key === "Enter") {
+  const pedirClima = (e) => {
+    if (e.key === "Enter") {
       fetch(`${api.fuente}weather?q=${consulta}&appid=${api.clave}&units=metric&lang=es`)
         .then(res => res.json())
         .then(resultado => {
@@ -26,9 +26,9 @@ function Clima() {
 
   const resultadoFecha = (fecha) => {
     let opcionesFecha = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' };
-    let fechaFormateada = fecha.toLocaleDateString('es-ES', opcionesFecha);
+    let fechaFormato = fecha.toLocaleDateString('es-ES', opcionesFecha);
 
-    return fechaFormateada;
+    return fechaFormato;
   };
 
   return (
