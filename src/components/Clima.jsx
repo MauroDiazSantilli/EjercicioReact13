@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Alert } from 'react-bootstrap';
 import Buscador from './Buscador';
 import ClimaCard from './ClimaCard';
 
@@ -11,15 +11,26 @@ const api = {
 function Clima() {
   const [consulta, setConsulta] = useState('');
   const [clima, setClima] = useState({});
+  const [error, setError] = useState('');
 
-  const pedirClima = (e) => {
-    if (e.key === "Enter") {
+  const pedirClima = (evento) => {
+    if (evento.key === "Enter" || evento === 'click') {
       fetch(`${api.fuente}weather?q=${consulta}&appid=${api.clave}&units=metric&lang=es`)
         .then(res => res.json())
         .then(resultado => {
-          setClima(resultado);
+          if (resultado.cod === '404') {
+            setError('No se encontraron datos para la ciudad ingresada.');
+            setClima({});
+          } else {
+            setClima(resultado);
+            setError('');
+          }
           setConsulta('');
-          console.log(resultado);
+        })
+        .catch(error => {
+          setError('Ocurrió un error al obtener los datos. Por favor, intenta nuevamente.');
+          setClima({});
+          setConsulta('');
         });
     }
   };
@@ -39,8 +50,9 @@ function Clima() {
           setConsulta={setConsulta}
           pedirClima={pedirClima}
         />
+        {error && <Alert variant="danger" className='mt-3'>{error}</Alert>}
       </div>
-      {(typeof clima.main !== "undefined") ? (
+      {(typeof clima.main !== "undefined" && !error) ? (
         <ClimaCard
           clima={clima}
           resultadoFecha={resultadoFecha}
